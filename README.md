@@ -11,7 +11,7 @@ A simple UI to create tickets into some ticket managers like, freshdesk, zendesk
 1. Install project dependencies.
    `yarn`
 2. Build UI and serve
-   `yarn ui:build & yarn ui:serve`
+   `yarn build & yarn serve`
    UI should be accessed at http://localhost:9000
 
 ### How to run application for development?
@@ -19,7 +19,7 @@ A simple UI to create tickets into some ticket managers like, freshdesk, zendesk
 1. Install project dependencies.
    `yarn`
 2. Watch and serve UI
-   `yarn ui:dev`
+   `yarn start`
    UI should be accessed at http://localhost:8000
 
 ### How to run unit tests?
