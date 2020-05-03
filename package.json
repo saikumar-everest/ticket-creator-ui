@@ -32,7 +32,7 @@
     }
   },
   "lint-staged": {
-    "*.ts": [
+    "*.js": [
       "yarn checks"
     ],
     "*.json": "prettier --write"
@@ -48,10 +48,8 @@
     "build": "gatsby build",
     "clean": "gatsby clean",
     "format": "prettier --write \"**/*.{js,ts,jsx,json,md,graphql}\"",
-    "rm-unused-imports": "tslint --config tslint-imports.json --project .",
-    "rm-unused-imports:fix": "tslint --config tslint-imports.json --fix --project .",
-    "lint": "tslint --config tslint.json --project .",
-    "checks": "yarn test && yarn lint && yarn format && yarn rm-unused-imports"
+    "lint": "tslint --config tslint.json 'src/**/*.js'",
+    "checks": "yarn test && yarn lint && yarn format"
   },
   "repository": {
     "type": "git",
