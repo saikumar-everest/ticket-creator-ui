@@ -1,5 +1,6 @@
 import React from 'react';
+import Button from 'react-bootstrap/Button';
 
-const IndexPage = () => <h1>something</h1>;
+const IndexPage = () => <Button>Click me</Button>;
 
 export default IndexPage;
