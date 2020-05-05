@@ -1,7 +1,17 @@
 import React, {Component} from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import {supportingTicketManagers} from '../constants/supporting-ticket-manager';
+import {graphql} from 'gatsby';
+
+export const supportingTicketManagersQuery = graphql`
+  query {
+    site {
+      siteMetadata {
+        supportingTicketManagers
+      }
+    }
+  }
+`;
 
 export default class CreateTicket extends Component {
   state = {
@@ -21,6 +31,7 @@ export default class CreateTicket extends Component {
   };
 
   renderTicketManagers = () => {
+    const {supportingTicketManagers} = this.props.data.site.siteMetadata;
     var options = supportingTicketManagers.map(manager => (
       <option key={manager} value={manager}>
         {manager.charAt(0).toUpperCase() + manager.slice(1)}

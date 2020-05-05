@@ -1,4 +1,6 @@
 module.exports = {
-  siteMetadata: {},
+  siteMetadata: {
+    supportingTicketManagers: ['freshdesk', 'zendesk'],
+  },
   plugins: [`gatsby-plugin-sass`],
 };
