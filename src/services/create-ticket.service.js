@@ -16,7 +16,7 @@ mutation Ticket($ticketInput: TicketInput!) {
 
 export const create = async ticketInput => {
   const instance = axios.create({
-    baseURL: 'http://localhost:3000',
+    baseURL: process.env.SERVER_URL,
     headers: {'Content-Type': 'application/json'},
   });
   const data = {
