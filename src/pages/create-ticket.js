@@ -28,7 +28,6 @@ export default class CreateTicket extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    // console.log(`${this.state.description}/${this.state.subject}/${this.state.email}/${this.state.ticketManager}`);
     const {ticketManager, subject, description, email} = this.state;
     const ticketInput = {
       ticketManager,
