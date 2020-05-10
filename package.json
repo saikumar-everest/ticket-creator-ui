@@ -5,9 +5,11 @@
   "version": "0.1.0",
   "author": "Saikumar Vantaku",
   "dependencies": {
+    "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
     "gatsby": "^2.21.0",
     "gatsby-plugin-sass": "^2.3.0",
+    "js-logger": "^1.6.0",
     "node-sass": "^4.14.0",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",

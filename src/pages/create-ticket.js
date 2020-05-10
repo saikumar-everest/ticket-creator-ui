@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import {graphql} from 'gatsby';
+import {create} from '../services/create-ticket.service';
 
 export const supportingTicketManagersQuery = graphql`
   query {
@@ -15,7 +16,7 @@ export const supportingTicketManagersQuery = graphql`
 
 export default class CreateTicket extends Component {
   state = {
-    ticketManager: '',
+    ticketManager: this.props.data.site.siteMetadata.supportingTicketManagers[0],
     subject: '',
     description: '',
     email: '',
@@ -28,6 +29,14 @@ export default class CreateTicket extends Component {
   handleSubmit = event => {
     event.preventDefault();
     // console.log(`${this.state.description}/${this.state.subject}/${this.state.email}/${this.state.ticketManager}`);
+    const {ticketManager, subject, description, email} = this.state;
+    const ticketInput = {
+      ticketManager,
+      subject,
+      description,
+      email,
+    };
+    create(ticketInput);
   };
 
   renderTicketManagers = () => {
