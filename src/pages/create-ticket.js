@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import {graphql} from 'gatsby';
+import {graphql, Link} from 'gatsby';
 import {create} from '../services/create-ticket.service';
 
 export const supportingTicketManagersQuery = graphql`
@@ -20,23 +20,35 @@ export default class CreateTicket extends Component {
     subject: '',
     description: '',
     email: '',
+    createdSuccessfully: null,
+    response: {},
   };
 
   handleInputChange = event => {
     this.setState({[event.target.name]: event.target.value});
   };
 
-  handleSubmit = event => {
+  handleSubmit = async event => {
     event.preventDefault();
     const {ticketManager, subject, description, email} = this.state;
-    const ticketInput = {
-      ticketManager,
-      subject,
-      description,
-      email,
-    };
-    create(ticketInput);
+    const {
+      data: {data, errors},
+    } = await create({ticketManager, subject, description, email});
+
+    this.setState({
+      createdSuccessfully: this.isCreatedSuccessfully(data, errors),
+      response: {
+        data: {
+          ticket: {...data.ticket, ticketManager},
+        },
+        errors,
+      },
+    });
   };
+
+  isCreatedSuccessfully(data, errors) {
+    return !!data?.ticket || !errors?.length;
+  }
 
   renderTicketManagers = () => {
     const {supportingTicketManagers} = this.props.data.site.siteMetadata;
@@ -60,9 +72,41 @@ export default class CreateTicket extends Component {
     );
   };
 
+  errorInCreation = errorMessage => {
+    return (
+      <div className="alert alert-danger" role="alert">
+        Some error in creation: {errorMessage}
+      </div>
+    );
+  };
+
+  successInCreation = ticket => {
+    return (
+      <section>
+        <div className="alert alert-success" role="alert">
+          Ticket successfully created!
+          <Link className="ml-5" to="/tickets" state={{tickets: [ticket]}}>
+            View tickets
+          </Link>
+        </div>
+      </section>
+    );
+  };
+
+  createActionMessage = () => {
+    if (this.state.createdSuccessfully) {
+      return this.successInCreation(this.state.response.data.ticket);
+    }
+    if (this.state.createdSuccessfully === null) {
+      return;
+    }
+    return this.errorInCreation(this.state.response.errors?.[0]?.message);
+  };
+
   render() {
     return (
       <section>
+        {this.createActionMessage()}
         <Form className="m-5" onSubmit={this.handleSubmit}>
           {this.renderTicketManagers()}
           <Form.Group controlId="createTicketForm.subject">
@@ -73,6 +117,7 @@ export default class CreateTicket extends Component {
               value={this.state.subject}
               onChange={this.handleInputChange}
               placeholder="Printer not working!"
+              required
             />
           </Form.Group>
           <Form.Group controlId="createTicketForm.email">
@@ -83,6 +128,7 @@ export default class CreateTicket extends Component {
               value={this.state.email}
               onChange={this.handleInputChange}
               placeholder="name@example.com"
+              required
             />
           </Form.Group>
           <Form.Group controlId="createTicketForm.description">
@@ -93,6 +139,7 @@ export default class CreateTicket extends Component {
               name="description"
               value={this.state.description}
               onChange={this.handleInputChange}
+              required
             />
           </Form.Group>
           <Button type="submit">Create</Button>

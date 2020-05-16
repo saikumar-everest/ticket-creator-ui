@@ -14,19 +14,15 @@ mutation Ticket($ticketInput: TicketInput!) {
   } 
 `;
 
+const instance = axios.create({
+  baseURL: process.env.SERVER_URL,
+  headers: {'Content-Type': 'application/json'},
+});
+
 export const create = async ticketInput => {
-  const instance = axios.create({
-    baseURL: process.env.SERVER_URL,
-    headers: {'Content-Type': 'application/json'},
-  });
   const data = {
-    variables: {
-      ticketInput,
-    },
+    variables: {ticketInput},
     query: createTicketQuery,
   };
-  instance
-    .post('/graphql', data)
-    .then(res => Logger.debug(res))
-    .catch(err => Logger.error(err));
+  return instance.post('/graphql', data);
 };
