@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import {graphql, Link} from 'gatsby';
-import {create} from '../services/create-ticket.service';
+import {create} from '../services/ticket.service';
 
 export const supportingTicketManagersQuery = graphql`
   query {
@@ -86,7 +86,7 @@ export default class CreateTicket extends Component {
         <div className="alert alert-success" role="alert">
           Ticket successfully created!
           <Link className="ml-5" to="/tickets" state={{tickets: [ticket]}}>
-            View tickets
+            View ticket
           </Link>
         </div>
       </section>
