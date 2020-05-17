@@ -1,0 +1,63 @@
+{
+  "name": "ticket-creator-ui",
+  "private": true,
+  "description": "A simple UI to create tickets into some ticket managers like, freshdesk, zendesk, etc",
+  "version": "0.1.0",
+  "author": "Saikumar Vantaku",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "bootstrap": "^4.4.1",
+    "gatsby": "^2.21.0",
+    "gatsby-plugin-sass": "^2.3.0",
+    "js-logger": "^1.6.0",
+    "node-sass": "^4.14.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.12.0",
+    "react-bootstrap": "^1.0.1",
+    "react-dom": "^16.12.0",
+    "react-helmet": "^6.0.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^25.2.1",
+    "husky": "^4.2.5",
+    "jest": "^25.3.0",
+    "lint-staged": "^10.1.3",
+    "prettier": "^2.0.4",
+    "ts-jest": "^25.3.1",
+    "tslint": "^6.1.1",
+    "tslint-etc": "^1.10.1",
+    "typescript": "^3.8.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "yarn checks"
+    ],
+    "*.json": "prettier --write"
+  },
+  "keywords": [
+    "gatsby"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "test": "jest --runInBand --passWithNoTests",
+    "serve": "gatsby serve",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "clean": "gatsby clean",
+    "format": "prettier --write \"**/*.{js,ts,jsx,json,md,graphql}\"",
+    "lint": "tslint --config tslint.json 'src/**/*.js'",
+    "checks": "yarn test && yarn lint && yarn format"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+  },
+  "bugs": {
+    "url": "https://github.com/gatsbyjs/gatsby/issues"
+  }
+}
