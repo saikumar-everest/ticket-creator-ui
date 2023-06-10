@@ -7,7 +7,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "bootstrap": "^4.4.1",
-    "gatsby": "^2.21.0",
+    "gatsby": "^4.25.7",
     "gatsby-plugin-sass": "^2.3.0",
     "js-logger": "^1.6.0",
     "node-sass": "^4.14.0",
